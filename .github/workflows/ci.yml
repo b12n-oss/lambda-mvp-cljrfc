@@ -1,0 +1,51 @@
+name: CI
+
+# Offline-safe gate only: bb verify (test + build + smoke) needs no
+# AWS account. bb deploy/invoke/bench/teardown are NOT run here --
+# those touch a real AWS account, matching the jank sibling's own
+# ci.yml scoping.
+#
+# babashka + Node + npm + a JDK + zip is everything `bb verify` needs,
+# so this workflow runs the complete local gate.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+
+      # The Clojurific compiler runs on the JVM: its cljf launcher (started
+      # by the Vite plugin) needs Java 17 or later on PATH.
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: DeLaGuardo/setup-clojure@13.6.1
+        with:
+          bb: 1.12.196
+
+      # Split into three named steps rather than one `bb verify` call:
+      # a failure's STEP NAME alone then narrows down which of the
+      # three actually broke, without needing the run's full log text.
+      - name: Test (script/bench.clj unit tests)
+        run: bb test
+
+      - name: Build (Clojurific + vite build -> dist/lambda.zip)
+        run: bb build
+
+      - name: Smoke (invoke the bundled handler with a canned event)
+        run: bb smoke

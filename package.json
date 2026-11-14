@@ -1,0 +1,11 @@
+{
+  "name": "lambda-mvp-cljrfc",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AWS Lambda demo handler in ClojureScript compiled by Clojurific (ES modules + Vite), on AWS's managed nodejs24.x runtime",
+  "devDependencies": {
+    "clojurific": "0.12.15",
+    "vite": "^8.3.3"
+  }
+}
