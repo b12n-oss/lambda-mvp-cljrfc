@@ -7,11 +7,10 @@ shadow-cljs. Clojurific is a ClojureScript fork that emits one ES module per
 namespace and hands bundling to [Vite](https://vite.dev), with no Closure
 Compiler anywhere in the build.
 
-This is the sixth project in the `lambda-mvp-*` family, and it's a twin of
+This is the sixth project in the `lambda-mvp-*` family and a twin of
 [lambda-mvp-cljs](https://github.com/b12n-oss/lambda-mvp-cljs): same handler,
-same runtime, same deploy and bench scripts. The compiler is the only thing
-that changes, which makes the two the cleanest single-variable comparison the
-family has.
+same runtime, same deploy and bench scripts. Only the compiler changes, so the
+two make the cleanest single-variable comparison in the family.
 
 ## Status
 

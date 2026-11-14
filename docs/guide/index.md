@@ -4,7 +4,7 @@
 
 It has a twin, [lambda-mvp-cljs](https://github.com/b12n-oss/lambda-mvp-cljs). The handler, the runtime, and the deploy and bench scripts are the same in both repos, and only the compiler differs. When the two benchmark differently, the compiler and the bundle it produces are why.
 
-The `aws` commands use whatever your CLI already has configured (`AWS_PROFILE`/`AWS_REGION`, or `aws configure`). No profile, account or region is hardcoded, so the commands that produced the numbers in this guide will produce yours on your own account.
+The `aws` commands use whatever your CLI already has configured (`AWS_PROFILE`/`AWS_REGION`, or `aws configure`). No profile, account or region is hardcoded, so the commands that produced this guide's numbers will produce yours on your own account.
 
 ## How to read this guide
 

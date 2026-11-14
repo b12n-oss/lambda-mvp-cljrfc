@@ -11,9 +11,9 @@ lambda-mvp-cljs uses, and `script/bench.clj` is the parser every
 
 Both projects were deployed to one account in `ap-southeast-2` on 2026-11-14,
 arm64, managed `nodejs24.x`, and benched at the same time. Each ran
-`bb bench` three times, and since a single Cold Init sample is too noisy to
-call on its own, the table reports the median of those three runs with the
-Cold Init range beside it.
+`bb bench` three times. A single Cold Init sample is too noisy to call on its
+own, so the table reports the median of the three runs with the Cold Init
+range beside it.
 
 | Metric | shadow-cljs, 2048 MB | Clojurific, 2048 MB | shadow-cljs, 3008 MB | Clojurific, 3008 MB |
 |---|---|---|---|---|

@@ -6,8 +6,7 @@ thing that differs is the compiler: lambda-mvp-cljs uses shadow-cljs and the
 Closure Compiler's `:advanced` mode, while this project uses
 [Clojurific](https://github.com/WhimsicalCode/clojurific), a ClojureScript
 fork that emits ES modules and lets Vite bundle them. So any gap between the
-two projects' numbers comes from the compiler and its bundle, and nothing
-else.
+two projects' numbers comes from the compiler and its bundle.
 
 ## From namespace to `dist/index.mjs`
 
