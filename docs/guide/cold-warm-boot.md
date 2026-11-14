@@ -43,8 +43,8 @@ shadow-cljs bundle to the same size.
 first call took 3.0 to 4.4 ms against shadow-cljs's 4.3 to 6.8 ms, again
 without overlap. Clojurific's README credits its runtime gains to call-site
 protocol dispatch and `cljs.core` fast paths, and `js->clj`/`clj->js` on the
-first event go through exactly that code. That fits, but a 1.5 ms gap on a
-handler this small is a direction, not a measurement of the runtime work.
+first event go through exactly that code. With a gap of 1.5 ms on a handler
+this small, though, the numbers can't say which of those changes saved what.
 
 **Warm Duration is a tie.** Both sit between 1.6 and 2.0 ms, which is what a
 handler doing one `swap!` and two conversions costs once V8 has warmed up.
@@ -52,12 +52,13 @@ handler doing one `swap!` and two conversions costs once V8 has warmed up.
 **Memory is a few megabytes higher**, 81-82 MB against 77 MB, which lines up
 with the larger module staying resident.
 
-Added up, a cold invocation costs about the same either way. Clojurific's
-extra Init time outweighs the milliseconds it saves inside the handler, and
-`Billed Duration` on a managed runtime doesn't include Init anyway. The
-benefits Clojurific advertises (faster builds, hot reload, a REPL, ES module
-interop) are development-time ones that a one-shot Lambda build doesn't
-exercise.
+Added up, a cold invocation is slower with Clojurific and costs a little more.
+The 15 to 50 ms of extra Init is far more than the 1.5 ms it saves inside the
+handler, and Lambda bills Init along with the handler: the first Clojurific
+invoke billed 155 ms for 151.5 ms of Init and 3.0 ms of Duration, where
+shadow-cljs's billed 139 ms. Warm invocations cost the same. Most of what
+Clojurific advertises (faster builds, hot reload, a REPL, ES module interop)
+pays off while you develop, and a one-shot Lambda build doesn't use any of it.
 
 ### How this compares with earlier rounds
 

@@ -43,7 +43,7 @@ nothing in the bundle calls, then minifies with oxc and shortens the
 compiler's own `cljs$...` property names. For this handler the build log
 reports 1,667 removed statements and 488 renamed properties.
 
-## Dot access on the context object just works
+## Dot access on the context object
 
 lambda-mvp-cljs has to read the request id with
 `(unchecked-get context "awsRequestId")`. Under `:advanced`, Closure renames
@@ -79,5 +79,6 @@ the running process, and an MCP server for coding agents. A Lambda handler
 built once and zipped uses none of them: the build here is `vite build` and
 nothing else. To develop a handler interactively you'd add `repl: { nreplPort: 0 }`
 to the plugin's `compilerOptions` and run the handler under `vite`'s SSR
-environment, which the Clojurific Hono template shows. That's left out here
-to keep the build identical in spirit to the shadow-cljs sibling's.
+environment, the way the Clojurific Hono template runs its server. This repo
+leaves that out so its build stays a plain release build, like the shadow-cljs
+twin's.

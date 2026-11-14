@@ -70,6 +70,7 @@ jobs:
           test -f "$out/404.html"         || { echo "no 404 page generated"; exit 1; }
           test -f "$out/guide/clojurific-build.html" || { echo "clojurific-build guide page missing"; exit 1; }
           test -f "$out/guide/cold-warm-boot.html"  || { echo "cold-warm-boot guide page missing"; exit 1; }
+          test -f "$out/guide/getting-started.html" || { echo "getting-started guide page missing"; exit 1; }
 
           ! grep -rq '{{site-base}}' "$out"/index.html "$out"/guide/*.html \
             || { echo "unrendered template variable"; exit 1; }
